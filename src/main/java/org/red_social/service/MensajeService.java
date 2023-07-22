@@ -28,6 +28,7 @@ public class MensajeService {
         MensajeDAO.crearMensajeBD(mensaje);
     }
     public static void listarMensajes (){
+        MensajeDAO.leerMensajesBD();
 
     }
     public static void borrarMensaje (){

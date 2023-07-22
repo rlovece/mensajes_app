@@ -6,6 +6,7 @@ import org.red_social.model.Mensaje;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -39,7 +40,32 @@ public class MensajeDAO {
     }
 
     public static void leerMensajesBD() {
+        PreparedStatement ps = null;
 
+        ResultSet resultSet = null;
+
+        try (Connection objetoConexion = ConexionBD.hacerConexion()) {
+            String query = "SELECT * FROM `mensajes`";
+            ps = objetoConexion.prepareStatement(query);
+            resultSet = ps.executeQuery();
+            StringBuilder salida = new StringBuilder();
+            Mensaje mensaje = new Mensaje();
+
+            while ( resultSet.next()){
+               mensaje.setIdMensaje(resultSet.getInt("id_mensaje"));
+               mensaje.setCuerpoMensaje(resultSet.getString("mensaje"));
+               mensaje.setAutor(resultSet.getString("autor_mensaje"));
+               mensaje.setFecha(resultSet.getString("fecha_mensaje"));
+               salida.append(mensaje.toString());
+
+            }
+            EntradaSalida.SalidaInformacion(salida.toString(), "Lista de mensajes");
+
+
+        } catch (SQLException e1) {
+            EntradaSalida.SalidaError("\n\n Conexión fallida a Base de datos");
+
+        }
     }
 
     public static void borrarMensajeBD (int idMensaje){

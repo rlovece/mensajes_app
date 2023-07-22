@@ -87,4 +87,15 @@ public class Mensaje {
     ///endregion
 
 
+    ///region toString
+
+    @Override
+    public String toString() {
+        return "\n\n Mensaje: "+ idMensaje +
+                ", Autor: '" + autor +
+                ", Fecha:'" + fecha +
+                "\n" + cuerpoMensaje;
+    }
+
+    //endregion
 }
