@@ -32,7 +32,8 @@ public class MensajeService {
 
     }
     public static void borrarMensaje (){
-
+        int idMensaje = EntradaSalida.entradaInt("\n\n Ingrese Id del mensaje a borrar");
+        MensajeDAO.borrarMensajeBD(idMensaje);
     }
 
     public static void editarMensaje(){

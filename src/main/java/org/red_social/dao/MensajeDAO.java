@@ -69,7 +69,17 @@ public class MensajeDAO {
     }
 
     public static void borrarMensajeBD (int idMensaje){
+        PreparedStatement ps = null;
 
+        try (Connection objetoConexion = ConexionBD.hacerConexion()) {
+            String query = "DELETE FROM `mensajes` WHERE `mensajes`.`id_mensaje` = ?";
+            ps = objetoConexion.prepareStatement(query);
+            ps.setInt(1, idMensaje);
+            ps.executeUpdate();
+            EntradaSalida.SalidaInformacion("\n\nSe borro registro " + idMensaje, "Borrado exitos");
+        } catch (SQLException e1) {
+            EntradaSalida.SalidaError("\n\n Falló borrado de registro");
+        }
     }
 
     public static void modificarMensajeBD (Mensaje mensaje){
