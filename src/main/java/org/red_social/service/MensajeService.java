@@ -37,6 +37,9 @@ public class MensajeService {
     }
 
     public static void editarMensaje(){
-
+        Mensaje mensajeModificado = new Mensaje();
+        mensajeModificado.setCuerpoMensaje(EntradaSalida.entradaString("\n Ingrese mensaje modificado mensaje"));
+        mensajeModificado.setIdMensaje(EntradaSalida.entradaInt("\n id del mensaje a modificar"));
+        MensajeDAO.editarMensajeBD(mensajeModificado);
     }
 }

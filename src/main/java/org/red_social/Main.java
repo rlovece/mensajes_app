@@ -35,7 +35,6 @@ public class Main {
                     MensajeService.editarMensaje();
                     break;
 
-
                 case 0:
                     EntradaSalida.SalidaInformacion("\n\n Gracias por visitar Red Social",
                             "Hasta pronto");

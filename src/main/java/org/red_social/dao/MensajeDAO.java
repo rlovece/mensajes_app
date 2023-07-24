@@ -82,7 +82,19 @@ public class MensajeDAO {
         }
     }
 
-    public static void modificarMensajeBD (Mensaje mensaje){
+    public static void editarMensajeBD (Mensaje mensajeModificado){
+        PreparedStatement ps = null;
+
+        try (Connection objetoConexion = ConexionBD.hacerConexion()) {
+            String query = "UPDATE mensajes SET mensaje = ? WHERE id_mensaje = ?";
+            ps = objetoConexion.prepareStatement(query);
+            ps.setString(1, mensajeModificado.getCuerpoMensaje());
+            ps.setInt(2, mensajeModificado.getIdMensaje());
+            ps.executeUpdate();
+            EntradaSalida.SalidaInformacion("\n\nSe modificó registro " + mensajeModificado.getIdMensaje(), "Modificado con éxito");
+        } catch (SQLException e1) {
+            EntradaSalida.SalidaError("\n\n Falló modificación de registro");
+        }
 
     }
 
